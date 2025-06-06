@@ -25,14 +25,14 @@
       // aplico funciones en cada linea del texto y lo guardo en la variable resultados
 
       const resultados = lineas.map(linea => {
-        console.log(linea)
+        console.log(linea);
         // en cada renglon quito el \n que está al final porque me molesta
         linea = linea.replace(/\n/g, '').trim();
-        console.log(linea)
+        console.log(linea);
 
         // ahora corto toda la linea de texto en "pedazos" cada vez que hay un espacio
         const cortado = linea.split(' ');
-        console.log(cortado)
+        console.log(cortado);
 
         //reviso si tengo más de 2 pedazos
         if (cortado.length > 2) {
