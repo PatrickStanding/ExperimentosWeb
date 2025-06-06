@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Modificar Texto</title>
+</head>
+<body>
+  <!-- Vos sabes HTML, esto es solo un cuadro para insertar texto -->
+  <form onsubmit="modificarTexto(); return false;">
+    <textarea id="textoInput" rows="10" cols="50" placeholder="Tu texto acá ..."></textarea><br>
+    <button type="submit">Enviar</button>
+  </form>
+  <!-- el contenedor pre muestra texto sin modificar el formato, ahora esta vacio pero JS  lo va a llenar-->
+  <pre id="resultado"></pre>
+
+
+  <!-- Ahora corro codigo JavaScript que va a llenar el contenedor con id=resultado-->
+  <script>
+    function modificarTexto() {
+      // selecciono el conteido del elemento por su id
+      const input = document.getElementById("textoInput").value;
+      
+      // Separo el texto en renglones, \n signinifa nueva linea
+      const lineas = input.split('\n');
+      
+      // aplico funciones en cada linea del texto y lo guardo en la variable resultados
+
+      const resultados = lineas.map(linea => {
+
+        // en cada renglon quito el \n que está al final porque me molesta
+        linea = linea.replace(/\n/g, '').trim();
+
+        // ahora corto toda la linea de texto en "pedazos" cada vez que hay un espacio
+        const cortado = linea.split(' ');
+
+        //reviso si tengo más de 2 pedazos
+        if (cortado.length > 2) {
+
+          // quito el primer pedazo y lo guardo en la variable first_word
+          const first_word = cortado.shift();
+
+          // lo vuelvo a poner al final
+          cortado.push(first_word);
+
+
+          // pego todos los pedazos  dejando un espacio entre medio
+          return cortado.join(' ');
+        } else {
+          // si al comienzo tenia menos de 2 pedazos digo ERROR: lo que sea que pegaste
+          return "ERROR: " + linea;
+        }
+      });
+
+      // JS va a reemplazar el elemendo con id=resultado con el texto que modifiqué
+      document.getElementById("resultado").innerText = resultados.join('\n');
+    }
+  </script>
+</body>
+</html>
